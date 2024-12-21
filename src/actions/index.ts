@@ -1,4 +1,5 @@
 import { defineAction } from 'astro:actions'
+import { z } from 'astro:schema'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const Message = `
@@ -11,7 +12,8 @@ const Message = `
 
 export const server = {
   myAction: defineAction({
-    handler: async (input: string[]) => {
+    input: z.array(z.string()),
+    handler: async (input) => {
       const apiKey = import.meta.env.GOOGLE_AI_API_KEY
       const genAI = new GoogleGenerativeAI(apiKey)
 

@@ -1,12 +1,10 @@
----
-
----
-
 <div class="hero bg-base-200 min-h-screen">
   <div class="hero-content text-center">
     <div class="w-full">
       <h1 class="text-4xl font-bold">アイスブレイク<wbr />ジェネレーター</h1>
-      <p id="talkTheme" class="text-2xl py-12">-</p>
+      <p id="talkTheme" class="text-2xl py-12">
+        あのイーハトーヴォのすきとおった風
+      </p>
       <button id="generateTalkTheme" class="btn btn-primary">Ice Break</button>
     </div>
   </div>
@@ -18,12 +16,13 @@
 
   const button = document.querySelector('#generateTalkTheme')
   const paragraph = document.querySelector('#talkTheme')
+
   button?.addEventListener('click', async () => {
     const { data, error } = await actions.myAction($talkThemes.get())
     if (!error && paragraph) {
       console.log(data)
       $talkThemes.set([data, ...$talkThemes.get()])
-      paragraph.textContent = data
+      paragraph.textContent = $talkThemes.get()[0]
     }
   })
 </script>
